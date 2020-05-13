@@ -1,12 +1,8 @@
 // Init function for drop down menu load and intial web page load
-
 function init() {
     var drop_down = d3.select("#selDataset");
 
     d3.json("data/samples.json").then((data) => {
-        // console.log("Complete data set: ")
-        // console.log(data)
-
         // Loop through data.names array and append each of the values into the drop down menu
         data.names.forEach(function(name) {
             drop_down.append("option").text(name);
@@ -29,7 +25,6 @@ function buildplot(id) {
 
         // get object to operate on
         metadata_obj = metadata[0]
-            // console.log(`Filtered Metadata for Subject ID ${id} :`)
             // console.log(metadata_obj)
 
 
@@ -38,8 +33,7 @@ function buildplot(id) {
 
         // get object to operate on
         samplesfiltered_obj = samplesfiltered[0]
-            // console.log(`Filtered samples data for Subject ID ${id} :`)
-            // console.log(samplesfiltered_obj)
+
 
         // separate out otu_ids,sample_values and otu_labels from the big object as arrays to operate on
         var otu_ids = Object.values(samplesfiltered_obj.otu_ids)
@@ -54,7 +48,6 @@ function buildplot(id) {
             otu_labels: otu_labels[index]
         }))
 
-        // console.log(`Filtered samples object for Subject ID ${id} :`)
         // console.log(samples)
 
         // sorting samples by sample_values in descending order 
@@ -62,9 +55,6 @@ function buildplot(id) {
 
         // Get top 10 sample data from the sorted array and reverse it for plotly defaults
         sliced_reversed_Data = samples_sorted.slice(0, 10).reverse();
-        // console.log(`Top 10 OTU samples for Subject ID ${id} :`);
-        // console.log(sliced_reversed_Data)
-
 
 
         // ***************************************************
@@ -144,11 +134,8 @@ function buildplot(id) {
         // empty information each time before appending
         demographicInfo.html("");
 
-        // console.log(`Demographics Info for Subject ID ${id} :`);
-
         // loop through metadata object and get the required data to append as a h6 heading text
         Object.entries(metadata_obj).forEach((entry) => {
-            // console.log(`${entry[0]}: ${entry[1]}`)
             demographicInfo.append("h6").text(`${entry[0]}: ${entry[1]}`);
         });
 
@@ -183,7 +170,7 @@ function buildplot(id) {
                     { range: [5, 6], color: "#85a974" },
                     { range: [6, 7], color: "#709764" },
                     { range: [7, 8], color: "#5a9764" },
-                    { range: [8, 9], color: "#369764" },
+                    { range: [8, 9], color: "#369764" }
                 ]
             }
         }];
